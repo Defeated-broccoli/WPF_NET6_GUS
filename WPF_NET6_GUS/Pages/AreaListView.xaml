@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <DataGrid x:Name="AreaGrid" Margin="10px" ItemsSource="{Binding List}" Grid.Row="0"
@@ -88,7 +89,10 @@
 
         </DataGrid>
 
-        <Button Command="{Binding GetAllCommand}" Grid.Row="1" Margin="10 0 10 10">Click me</Button>
+        <Label Foreground="red" Content="{Binding ErrorMessage}" Grid.Row="1">
+            
+        </Label>
+        <Button Command="{Binding GetAllCommand}" Grid.Row="2" Margin="10 0 10 10">Download Data</Button>
     </Grid>
 
 </Page>

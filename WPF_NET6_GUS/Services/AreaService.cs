@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -12,7 +13,7 @@ using WPF_NET6_GUS.ViewModels;
 
 namespace WPF_NET6_GUS.Services
 {
-    public class AreaService :IAreaService
+    public class AreaService : IAreaService
     {
         public ObservableCollection<AreaViewModel> GetAreas()
         {
@@ -34,21 +35,21 @@ namespace WPF_NET6_GUS.Services
                     }
                     else
                     {
-                        Console.WriteLine($"Error: {response.StatusCode}");
+                        Trace.WriteLine($"Error: {response.StatusCode}");
                     }
                 }
             }
             catch (TaskCanceledException ex)
             {
-                Console.WriteLine(ex);
+                Trace.WriteLine(ex);
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine(ex);
+                Trace.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Trace.WriteLine(ex);
             }
 
             return list;

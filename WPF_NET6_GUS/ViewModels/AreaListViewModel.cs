@@ -14,6 +14,10 @@ namespace WPF_NET6_GUS.ViewModels
     {
         private readonly IAreaService _areaService;
         private ObservableCollection<AreaViewModel> list;
+        private string errorMessage;
+
+        public ICommand GetAllCommand { get; set; }
+
         public ObservableCollection<AreaViewModel> List
         {
             get
@@ -26,7 +30,19 @@ namespace WPF_NET6_GUS.ViewModels
                 OnPropertyChanged(nameof(List));
             }
         }
-        public ICommand GetAllCommand { get; set; }
+
+        public string ErrorMessage 
+        { 
+            get
+            {
+                return errorMessage;
+            }
+            set
+            {
+                errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));    
+            }
+        }
 
         public AreaListViewModel(IAreaService areaService)
         {
@@ -38,6 +54,15 @@ namespace WPF_NET6_GUS.ViewModels
         {
             List = _areaService.GetAreas();
             OnPropertyChanged(nameof(List));
+
+            if(List.Count < 1 || List == null)
+            {
+                ErrorMessage = "Sorry! We couldn't download data. Please, try again later";
+            }
+            else
+            {
+                ErrorMessage = string.Empty;
+            }
         }
     }
 }
